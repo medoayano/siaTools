@@ -2,7 +2,7 @@
 % Please edit documentation in R/WilcoxonTest.R
 \name{WCtest}
 \alias{WCtest}
-\title{Performing Steel-Dwass test}
+\title{Performing Wilcoxon test}
 \usage{
 WCtest(dt, save_results)
 }

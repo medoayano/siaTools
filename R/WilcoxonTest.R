@@ -1,4 +1,4 @@
-#' @title Performing Steel-Dwass test
+#' @title Performing Wilcoxon test
 #' @description \code{WCtest} set the slack information to system
 #' @importFrom exactRankTests wilcox.exact
 #' @param dt data set with ID (column 1) and stable isotope ratios (column 2~n)
@@ -27,11 +27,11 @@ WCtest <- function(dt, save_results){
 
       Group_i <- Group_list[i]
       dt_iso <- dt[dt[,1] == Group_i,]
-      lis[[i]] <- dt_iso[,j]
+      lis[[i]] <- dt_iso[,j] <- dt_iso[,j]
 
     }
 
-    results <- wilcox.exact(lis, paired = F)
+    results <- wilcox.exact(unlist(lis[1]), unlist(lis[2]), paired = F)
     file.name <- sprintf("wilcox.exact_%s.txt", colnames(dt)[j])
 
     if(save_results == TRUE){
