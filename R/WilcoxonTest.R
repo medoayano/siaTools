@@ -6,7 +6,7 @@
 #' @export
 #' @examples
 #' # mydata <- read.csv("All.csv", header = T)
-#' # Wilctest(mydata, TRUE)
+#' # WCtest(mydata, TRUE)
 
 WCtest <- function(dt, save_results){
 
