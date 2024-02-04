@@ -1,19 +1,23 @@
 #' @title Performing Steel-Dwass test
-#' @description \code{SDtest} set the slack information to system
-#' @importFrom NSM3 pSDCFlig
+#' @description \code{WCtest} set the slack information to system
+#' @importFrom exactRankTests wilcox.exact
 #' @param dt data set with ID (column 1) and stable isotope ratios (column 2~n)
 #' @param save_results if you want to save results as .txt file, put TRUE here
 #' @export
 #' @examples
 #' # mydata <- read.csv("All.csv", header = T)
-#' # SDtest(mydata, TRUE)
+#' # Wilctest(mydata, TRUE)
 
-SDtest <- function(dt, save_results){
+WCtest <- function(dt, save_results){
 
   lis <- list()
 
   Group <- dt[,1]
   Group_list <- unique(Group)
+
+  if(length(Group_list) > 2) {
+    stop(paste("***Error: Wilcoxon Rank Test can only run with 2 groups"))
+  }
 
   for (j in 2:ncol(dt)) {
 
@@ -27,8 +31,8 @@ SDtest <- function(dt, save_results){
 
     }
 
-    results <- pSDCFlig(lis, method="Asymptotic")
-    file.name <- sprintf("steel.dwass_%s.txt", colnames(dt)[j])
+    results <- wilcox.exact(lis, paired = F)
+    file.name <- sprintf("wilcox.exact_%s.txt", colnames(dt)[j])
 
     if(save_results == TRUE){
       sink(file.name, append = TRUE)
